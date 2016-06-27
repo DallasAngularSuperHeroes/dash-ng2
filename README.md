@@ -404,3 +404,6 @@ You can follow the [Angular 2 change log here](https://github.com/angular/angula
 # License
 
 MIT
+=======
+# dash-ng2
+Angular 2 example
