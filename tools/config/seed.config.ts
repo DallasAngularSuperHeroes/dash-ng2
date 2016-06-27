@@ -317,6 +317,9 @@ export class SeedConfig {
       'app/*': `/app/*`,
       '*': `node_modules/*`
     },
+    map: {
+      lodash: './node_modules/lodash/lodash.js'
+    },
     packages: {
       rxjs: { defaultExtension: false }
     }

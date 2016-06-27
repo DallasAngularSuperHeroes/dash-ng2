@@ -1,0 +1,11 @@
+<h1>Member List</h1>
+<!--<form (submit)="addName()">-->
+  <!--<input [(ngModel)]="newName" placeholder="Awesome Computer Scientist">-->
+  <!--<button type="submit">Add</button>-->
+<!--</form>-->
+
+<ul>
+  <li *ngFor="let member of members">
+  <a href="/member?id={{member.id}}">{{member.name}}</a>
+  </li>
+</ul>
