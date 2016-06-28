@@ -1,4 +1,4 @@
-import {provide, Injectable} from '@angular/core';
+import {provide, Injectable, Injector, ReflectiveInjector} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
@@ -25,8 +25,8 @@ export class MemberListService {
      static getInstance(http: Http): MemberListService {
         if (MemberListService.instance == null) {
             MemberListService.isCreating = true;
-            // var injector = Injector.resolveAndCreate([Http]);
-            // var http = injector.get(Http);
+          //   var injector = ReflectiveInjector.resolveAndCreate([Http]);
+          // var http = injector.get(Http);
             MemberListService.instance = new MemberListService(http);
             MemberListService.isCreating = false;
         }
@@ -35,10 +35,11 @@ export class MemberListService {
     }
 
     init():Observable<Member[]> {
-        console.log('111 init()');
+        console.trace('111 service.init() ');
         if (this.members && this.members.length) {
             return Observable.from([this.members]);
         }
+      console.log('112');
         if (!this.request) {
             this.request = this.http.get('/assets/meetupMembers.json')
                 .map((response:Response) => response.json())
@@ -87,8 +88,10 @@ export class MemberListService {
 // ]
 // );
 
+var memberListService : MemberListService;
+
 export const MemberListServiceProvider = [
-    provide(MemberListService, {
+    provide(memberListService, {
         deps: [Http],
         useFactory: (http: Http): MemberListService => {
             return MemberListService.getInstance(http);
