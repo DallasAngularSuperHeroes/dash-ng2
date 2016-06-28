@@ -10,7 +10,6 @@ import {Http} from '@angular/http';
   selector: 'member',
   templateUrl: 'member.component.html',
   styleUrls: ['member.component.css'],
-  // providers: [memberListServiceProvider],
   directives: [REACTIVE_FORM_DIRECTIVES]
 })
 /**
@@ -19,11 +18,12 @@ import {Http} from '@angular/http';
 export class MemberComponent implements OnInit {
 
   member:Member;
-  memberListService:MemberListService;
+  // memberListService:MemberListService;
 
-  constructor(private router:Router, private http:Http) {
-    this.memberListService = MemberListService.getInstance(this.http);
-    console.log('148 ' + this.memberListService.members);
+  constructor(private router:Router, private http:Http,
+              private memberListService: MemberListService ) {
+    // this.memberListService = MemberListService.getInstance(this.http);
+    // console.log('148 ' + this.memberListService.members);
   }
 
   ngOnInit() {
@@ -43,7 +43,7 @@ export class MemberComponent implements OnInit {
             console.log(`211 selectedId ${JSON.stringify(selectedId)}`);
             this.member = this.memberListService.getMember(selectedId);
           }
-          console.log(`232 this.member ${JSON.stringify(this.member)}`);
+          console.log(`232 this.member this.member`);
         });
     });
 

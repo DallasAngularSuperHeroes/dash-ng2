@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { HTTP_PROVIDERS } from '@angular/http';
 
-import { Config, NameListService, MemberListService, Member, NavbarComponent, ToolbarComponent } from './shared/index';
+import { Config, NameListService, MemberListServiceProvider, Member, NavbarComponent, ToolbarComponent } from './shared/index';
 
 /**
  * This class represents the main application component. Within the @Routes annotation is the configuration of the
@@ -13,11 +13,11 @@ import { Config, NameListService, MemberListService, Member, NavbarComponent, To
   selector: 'sd-app',
   viewProviders: [NameListService, Member, HTTP_PROVIDERS],
   templateUrl: 'app.component.html',
-  providers: [MemberListService],
+  providers: [MemberListServiceProvider],
   directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent]
 })
 export class AppComponent {
-  constructor(memberListService: MemberListService) {
+  constructor() {
     console.log('Environment config', Config);
   }
 }

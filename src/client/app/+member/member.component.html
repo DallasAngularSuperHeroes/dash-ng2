@@ -1,12 +1,8 @@
-<h1>member</h1>
-<p>quoted "{{member}}"</p>
-<p>raw {{member}}</p>
-<h3>{{member?.name}}</h3>
-<!--<div *ng-if="member" class="objView ng-scope vm.memberPage">-->
+<h1>{{member?.name}}</h1>
   <div class="objView ng-scope vm.memberPage">
 
   <form>
-    <!--<img ng-src="{{member.photo.photo_link}}"/>-->
+    <img src="{{member?.photo?.photo_link}}"/>
     <section class="objValues">
       <div><span class="label">city</span><span class="value">{{member?.city}}</span></div>
       <div class="field-country"><span class="label">country</span><span field name="member.country"

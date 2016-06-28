@@ -15,16 +15,20 @@ export class MemberListService {
     public errorMessage:string;
     static instance: MemberListService = null;
     static isCreating:boolean = false;
+  private http:Http;
 
-    constructor(private http:Http) {
+    constructor(http:Http) {
+      this.http = http;
         // if (!MemberListService.isCreating) {
         //     throw new Error("You can't call new in Singleton instances! Call SingletonService.getInstance() instead.");
         // }
     }
 
      static getInstance(http: Http): MemberListService {
-        if (MemberListService.instance == null) {
-            MemberListService.isCreating = true;
+       console.trace('900 new instance');
+       if (MemberListService.instance == null) {
+          console.trace('901 new instance');
+          MemberListService.isCreating = true;
           //   var injector = ReflectiveInjector.resolveAndCreate([Http]);
           // var http = injector.get(Http);
             MemberListService.instance = new MemberListService(http);
@@ -35,7 +39,7 @@ export class MemberListService {
     }
 
     init():Observable<Member[]> {
-        console.trace('111 service.init() ');
+        console.trace('111 service.init() this.members.length ' +(this.members? this.members.length: '0'));
         if (this.members && this.members.length) {
             return Observable.from([this.members]);
         }
@@ -82,18 +86,11 @@ export class MemberListService {
 
 }
 
-// var injectorClass = Injector.([
-//     service,
-//     {provide: MemberListService, useClass: MemberListService}
-// ]
-// );
-
-var memberListService : MemberListService;
-
 export const MemberListServiceProvider = [
-    provide(memberListService, {
+    provide(MemberListService, {
         deps: [Http],
         useFactory: (http: Http): MemberListService => {
+          console.log('354 ' + http);
             return MemberListService.getInstance(http);
         }
     })
