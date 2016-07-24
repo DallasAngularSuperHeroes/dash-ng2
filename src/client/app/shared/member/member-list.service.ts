@@ -12,10 +12,9 @@ export class MemberListService {
 
     public members:Member[] = [];
     private request:Observable<Member[]>;
-    public errorMessage:string;
     static instance: MemberListService = null;
     static isCreating:boolean = false;
-  private http:Http;
+    private http:Http;
 
     constructor(http:Http) {
       this.http = http;
@@ -25,9 +24,7 @@ export class MemberListService {
     }
 
      static getInstance(http: Http): MemberListService {
-       console.trace('900 new instance');
        if (MemberListService.instance == null) {
-          console.trace('901 new instance');
           MemberListService.isCreating = true;
           //   var injector = ReflectiveInjector.resolveAndCreate([Http]);
           // var http = injector.get(Http);
@@ -39,17 +36,14 @@ export class MemberListService {
     }
 
     init():Observable<Member[]> {
-        console.trace('111 service.init() this.members.length ' +(this.members? this.members.length: '0'));
         if (this.members && this.members.length) {
             return Observable.from([this.members]);
         }
-      console.log('112');
         if (!this.request) {
             this.request = this.http.get('/assets/meetupMembers.json')
                 .map((response:Response) => response.json())
                 .map((data) => {
                     this.request = null;
-                    console.log('115 ' + data.results[0]);
                     this.members = data.results;
                     return this.members;
                 });
@@ -90,7 +84,6 @@ export const MemberListServiceProvider = [
     provide(MemberListService, {
         deps: [Http],
         useFactory: (http: Http): MemberListService => {
-          console.log('354 ' + http);
             return MemberListService.getInstance(http);
         }
     })

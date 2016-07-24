@@ -4,21 +4,26 @@
   <form>
     <img src="{{member?.photo?.photo_link}}"/>
     <section class="objValues">
-      <div><span class="label">city</span><span class="value">{{member?.city}}</span></div>
+      <div><span class="label" [style.color]="myelement.value" #mycountry>city</span><span class="value">{{member?.city}}</span></div>
       <div class="field-country"><span class="label">country</span><span field name="member.country"
                                                                          class="value">{{member?.country}}</span>
       </div>
-      <div><span class="label">state</span><span class="value">{{member?.state}}</span></div>
+      <div><span class="label" [style.color]="mycountry.style.color">state</span><span class="value">{{member?.state}}</span></div>
       <div><span class="label">joined</span><span class="value">{{member?.joined | date: 'yyyy-MM-dd hh:mm'}}</span>
       </div>
       <div><span class="label">state</span>
         <field name="member.state" class="value"></field>
       </div>
       <div><span class="label">topics</span><span class="value">
-                <span ng-repeat="topic in member?.topics">{{topic?.name}}, </span></span>
+                <span *ngFor="let topic of member?.topics">{{topic?.name}}, </span></span>
       </div>
       <div><span class="label">friends</span><span class="value">
-                <span ng-repeat="friend in member?.friends">{{friend}}, </span></span>
+                <span *ngFor="let friend of member?.friends">{{friend}}, </span></span>
+      </div>
+      <div>
+        <br/>
+        What color do you want ?
+        <input type="text" #myelement/>
       </div>
     </section>
     <!--<div class="buttonBar">-->

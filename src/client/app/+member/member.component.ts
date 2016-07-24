@@ -18,7 +18,8 @@ import {Http} from '@angular/http';
 export class MemberComponent implements OnInit {
 
   member:Member;
-  // memberListService:MemberListService;
+  
+  //memberListService:MemberListService;
 
   constructor(private router:Router, private http:Http,
               private memberListService: MemberListService ) {
@@ -28,22 +29,15 @@ export class MemberComponent implements OnInit {
 
   ngOnInit() {
     var ctrl = this;
-    return this.memberListService.init().subscribe(members => {
-      console.log(`132  ${JSON.stringify(members[0].country)}`);
-      console.log(`133  `);
-
+    return this.memberListService.init().subscribe( members => {
       return ctrl.router
         .routerState
         .queryParams
         .subscribe(params => {
           var selectedId = +params['id'];
-          console.log(`230 this.memberListService.members ${JSON.stringify(this.memberListService.members[0])}`);
-
           if (selectedId) {
-            console.log(`211 selectedId ${JSON.stringify(selectedId)}`);
             this.member = this.memberListService.getMember(selectedId);
           }
-          console.log(`232 this.member this.member`);
         });
     });
 
